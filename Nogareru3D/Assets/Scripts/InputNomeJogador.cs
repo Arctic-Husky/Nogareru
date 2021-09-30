@@ -19,14 +19,14 @@ public class InputNomeJogador : MonoBehaviour
 
     private void SetUpInputField()
     {
-        if(!PlayerPrefs.HasKey(PlayerPrefsNameKey)) // Se essa chave existir
+        if(!PlayerPrefs.HasKey(PlayerPrefsNameKey)) // Se essa chave nao existir
         {
             return;
         }
 
-        string nomePadrao = PlayerPrefs.GetString(PlayerPrefsNameKey); // Seta o nome la do input
+        string nomePadrao = PlayerPrefs.GetString(PlayerPrefsNameKey); 
 
-        inputNomeJogador.text = nomePadrao;
+        inputNomeJogador.text = nomePadrao; // Seta o nome la do input
 
         SetPlayerName(nomePadrao);
     }
