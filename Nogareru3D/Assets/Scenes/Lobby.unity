@@ -271,10 +271,11 @@ MonoBehaviour:
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 9198137915435070777, guid: 1a379ba7be4582249abd8616c6792e14, type: 3}
+  playerPrefab: {fileID: 3129019824755802986, guid: a43182127ee5bb9469218dbd0f0558fa, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs: []
+  minJogadores: 2
   cenaMenu: Assets/Scenes/Lobby.unity
   roomPlayerPrefab: {fileID: 2866696107091219989, guid: 1a379ba7be4582249abd8616c6792e14, type: 3}
 --- !u!1 &547089390
