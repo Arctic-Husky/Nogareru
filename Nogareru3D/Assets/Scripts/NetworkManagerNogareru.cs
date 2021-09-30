@@ -34,6 +34,7 @@ public class NetworkManagerNogareru : NetworkManager
         base.OnClientConnect(conn);
 
         onClientConnected?.Invoke();
+        Debug.Log("Conectou!");
     }
 
     public override void OnClientDisconnect(NetworkConnection conn)
@@ -53,7 +54,7 @@ public class NetworkManagerNogareru : NetworkManager
 
         // Impede que um jogador se conecte em uma partida em andamento
 
-        if(SceneManager.GetActiveScene().name != cenaMenu)
+        if("Assets/Scenes/" + SceneManager.GetActiveScene().name + ".unity" != cenaMenu) // Caralho porra
         {
             conn.Disconnect();
             return;
