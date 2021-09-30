@@ -9,7 +9,7 @@ public class MenuPrincipal : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject landingPagePanel = null;
 
-    private void HostLobby()
+    public void HostLobby()
     {
         networkManager.StartHost();
 
