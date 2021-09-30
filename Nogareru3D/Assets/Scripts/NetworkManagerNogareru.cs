@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class NetworkManagerNogareru : NetworkManager
 {
+    [SerializeField] private int minJogadores = 2;
+
     [Scene]
     [SerializeField] private string cenaMenu = string.Empty;
 
@@ -16,6 +18,8 @@ public class NetworkManagerNogareru : NetworkManager
 
     public static event Action onClientConnected;
     public static event Action onClientDisconnected;
+
+    public List<NetworkRoomPlayer> RoomPlayers { get; } = new List<NetworkRoomPlayer>();
 
     public override void OnStartServer() => spawnPrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs").ToList();
 
@@ -61,13 +65,62 @@ public class NetworkManagerNogareru : NetworkManager
         }
     }
 
+    public override void OnServerDisconnect(NetworkConnection conn)
+    {
+        if(conn.identity != null)
+        {
+            var player = conn.identity.GetComponent<NetworkRoomPlayer>();
+
+            RoomPlayers.Remove(player);
+
+            NotifyPlayersOfReadyState();
+        }
+
+        base.OnServerDisconnect(conn);
+    }
+
+    public void NotifyPlayersOfReadyState()
+    {
+        foreach (var player in RoomPlayers)
+        {
+            player.HandleReadyToStart(IsReadyToStart());
+        }
+    }
+
+    private bool IsReadyToStart()
+    {
+        if(numPlayers < minJogadores)
+        {
+            return false;
+        }
+
+        foreach (var player in RoomPlayers)
+        {
+            if(!player.IsReady)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
         if ("Assets/Scenes/" + SceneManager.GetActiveScene().name + ".unity"== cenaMenu)
         {
+            bool isLeader = RoomPlayers.Count == 0;
+
             NetworkRoomPlayer roomPlayerInstance = Instantiate(roomPlayerPrefab);
 
-            NetworkServer.AddPlayerForConnection(conn, roomPlayerInstance.gameObject);
+            roomPlayerInstance.IsLeader = isLeader;
+
+            bool v = NetworkServer.AddPlayerForConnection(conn, roomPlayerInstance.gameObject);
         }
+    }
+
+    public override void OnStopServer()
+    {
+        RoomPlayers.Clear();
     }
 }
