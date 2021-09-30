@@ -286,8 +286,8 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs: []
-  cenaMenu: 
-  roomPlayerPrefab: {fileID: 0}
+  cenaMenu: Assets/Scenes/Lobby.unity
+  roomPlayerPrefab: {fileID: 2866696107091219989, guid: 1a379ba7be4582249abd8616c6792e14, type: 3}
 --- !u!1 &547089390
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,6 +412,17 @@ Transform:
   m_Father: {fileID: 1423047676}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1037059302 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 954228682829735610, guid: e608c6e24491d5e4d997dc12f27ec9ab, type: 3}
+  m_PrefabInstance: {fileID: 954228681469225569}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f9cd42d2e68c724b8c2ecd490b85e8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1423047675
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,6 +692,14 @@ PrefabInstance:
     - target: {fileID: 954228682829735611, guid: e608c6e24491d5e4d997dc12f27ec9ab, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 954228683091090252, guid: e608c6e24491d5e4d997dc12f27ec9ab, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1037059302}
+    - target: {fileID: 954228683091090252, guid: e608c6e24491d5e4d997dc12f27ec9ab, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HostLobby
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e608c6e24491d5e4d997dc12f27ec9ab, type: 3}

@@ -62,7 +62,7 @@ public class NetworkManagerNogareru : NetworkManager
 
     public override void OnServerAddPlayer(NetworkConnection conn)
     {
-        if(SceneManager.GetActiveScene().name == cenaMenu)
+        if ("Assets/Scenes/" + SceneManager.GetActiveScene().name + ".unity"== cenaMenu)
         {
             NetworkRoomPlayer roomPlayerInstance = Instantiate(roomPlayerPrefab);
 
