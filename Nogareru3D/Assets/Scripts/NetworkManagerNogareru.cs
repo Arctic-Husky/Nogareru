@@ -115,7 +115,7 @@ public class NetworkManagerNogareru : NetworkManager
 
             roomPlayerInstance.IsLeader = isLeader;
 
-            bool v = NetworkServer.AddPlayerForConnection(conn, roomPlayerInstance.gameObject);
+            NetworkServer.AddPlayerForConnection(conn, roomPlayerInstance.gameObject);
         }
     }
 

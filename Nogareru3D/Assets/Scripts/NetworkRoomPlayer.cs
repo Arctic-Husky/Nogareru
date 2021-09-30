@@ -15,7 +15,7 @@ public class NetworkRoomPlayer : NetworkBehaviour
     [SerializeField] private Button startGameButton = null;
 
     [SyncVar(hook = nameof(HandleDisplayNameChanged))] // O hook chama o metodo quando a variavel sincronizada se altera
-    public string DisplayName = "Loading...";
+    public string DisplayName = "Carregando...";
 
     [SyncVar(hook = nameof(HandleReadyStatusChanged))]
     public bool IsReady = false;
@@ -50,7 +50,6 @@ public class NetworkRoomPlayer : NetworkBehaviour
 
         lobbyUI.SetActive(true);
 
-        base.OnStartAuthority();
     }
 
     public override void OnStartClient()
@@ -131,5 +130,6 @@ public class NetworkRoomPlayer : NetworkBehaviour
         }
 
         //Start game
+        Debug.Log("Jogo comecou!");
     }
 }
