@@ -278,6 +278,7 @@ MonoBehaviour:
   minJogadores: 2
   cenaMenu: Assets/Scenes/Lobby.unity
   roomPlayerPrefab: {fileID: 2866696107091219989, guid: 1a379ba7be4582249abd8616c6792e14, type: 3}
+  gamePlayerPrefab: {fileID: 1748323021119794927, guid: fb83814754c697442a96fc963560acd1, type: 3}
 --- !u!1 &547089390
 GameObject:
   m_ObjectHideFlags: 0

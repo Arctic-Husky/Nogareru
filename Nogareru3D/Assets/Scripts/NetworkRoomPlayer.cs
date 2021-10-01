@@ -130,6 +130,6 @@ public class NetworkRoomPlayer : NetworkBehaviour
         }
 
         //Start game
-        Debug.Log("Jogo comecou!");
+        Room.StartGame();
     }
 }

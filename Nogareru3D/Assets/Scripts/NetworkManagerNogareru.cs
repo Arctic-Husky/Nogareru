@@ -16,10 +16,16 @@ public class NetworkManagerNogareru : NetworkManager
     [Header("Room")]
     [SerializeField] private NetworkRoomPlayer roomPlayerPrefab = null;
 
-    public static event Action onClientConnected;
-    public static event Action onClientDisconnected;
+    [Header("Game")]
+    [SerializeField] private NetworkGamePlayer gamePlayerPrefab = null;
+
+    public static event Action OnClientConnected;
+    public static event Action OnClientDisconnected;
+    public static event Action<NetworkConnection> OnServerReadied;
 
     public List<NetworkRoomPlayer> RoomPlayers { get; } = new List<NetworkRoomPlayer>();
+    public List<NetworkGamePlayer> GamePlayers { get; } = new List<NetworkGamePlayer>();
+    //public List<NetworkRoomPlayer> SpectatorPlayers { get; } = new List<NetworkRoomPlayer>();
 
     public override void OnStartServer() => spawnPrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs").ToList();
 
@@ -37,7 +43,7 @@ public class NetworkManagerNogareru : NetworkManager
     {
         base.OnClientConnect(conn);
 
-        onClientConnected?.Invoke();
+        OnClientConnected?.Invoke();
         Debug.Log("Conectou!");
     }
 
@@ -45,7 +51,7 @@ public class NetworkManagerNogareru : NetworkManager
     {
         base.OnClientDisconnect(conn);
 
-        onClientDisconnected?.Invoke();
+        OnClientDisconnected?.Invoke();
     }
 
     public override void OnServerConnect(NetworkConnection conn)
@@ -122,5 +128,44 @@ public class NetworkManagerNogareru : NetworkManager
     public override void OnStopServer()
     {
         RoomPlayers.Clear();
+    }
+
+    public void StartGame()
+    {
+        if("Assets/Scenes/" + SceneManager.GetActiveScene().name + ".unity" == cenaMenu)
+        {
+            if(!IsReadyToStart())
+            {
+                return;
+            }
+
+            ServerChangeScene("Assets/Scenes/Jogo_Mapa_01.unity"); // Colocar logica dps pra selecionar o mapa
+        }
+    }
+
+    public override void ServerChangeScene(string newSceneName)
+    {
+        if("Assets/Scenes/" + SceneManager.GetActiveScene().name + ".unity" == cenaMenu && newSceneName.StartsWith("Assets/Scenes/Jogo_Mapa"))
+        {
+            for (int i = RoomPlayers.Count - 1; i >= 0; i--)
+            {
+                var conn = RoomPlayers[i].connectionToClient;
+                var gamePlayerInstance = Instantiate(gamePlayerPrefab);
+                gamePlayerInstance.SetDisplayName(RoomPlayers[i].DisplayName);
+
+                NetworkServer.Destroy(conn.identity.gameObject);
+
+                NetworkServer.ReplacePlayerForConnection(conn, gamePlayerInstance.gameObject);
+            }
+        }
+
+        base.ServerChangeScene(newSceneName);
+    }
+
+    public override void OnServerReady(NetworkConnection conn) // Quando um client carregar
+    {
+        base.OnServerReady(conn);
+
+        OnServerReadied?.Invoke(conn);
     }
 }

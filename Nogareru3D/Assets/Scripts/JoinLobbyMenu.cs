@@ -16,13 +16,13 @@ public class JoinLobbyMenu : MonoBehaviour
 
     private void OnEnable()
     {
-        NetworkManagerNogareru.onClientConnected += HandleClientConnected;
-        NetworkManagerNogareru.onClientDisconnected += HandleClientDisconnected;
+        NetworkManagerNogareru.OnClientConnected += HandleClientConnected;
+        NetworkManagerNogareru.OnClientDisconnected += HandleClientDisconnected;
     }
     private void OnDisable()
     {
-        NetworkManagerNogareru.onClientConnected -= HandleClientConnected;
-        NetworkManagerNogareru.onClientDisconnected -= HandleClientDisconnected;
+        NetworkManagerNogareru.OnClientConnected -= HandleClientConnected;
+        NetworkManagerNogareru.OnClientDisconnected -= HandleClientDisconnected;
     }
 
     public void JoinLobby()
