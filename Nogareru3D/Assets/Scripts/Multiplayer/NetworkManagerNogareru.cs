@@ -18,6 +18,7 @@ public class NetworkManagerNogareru : NetworkManager
 
     [Header("Game")]
     [SerializeField] private NetworkGamePlayer gamePlayerPrefab = null;
+    [SerializeField] private GameObject playerSpawnSystem = null;
 
     public static event Action OnClientConnected;
     public static event Action OnClientDisconnected;
@@ -160,6 +161,15 @@ public class NetworkManagerNogareru : NetworkManager
         }
 
         base.ServerChangeScene(newSceneName);
+    }
+
+    public override void OnServerSceneChanged(string sceneName)
+    {
+        if(sceneName.StartsWith("Assets/Scenes/Jogo_Mapa"))
+        {
+            GameObject playerSpawnSystemInstance = Instantiate(playerSpawnSystem);
+            NetworkServer.Spawn(playerSpawnSystemInstance);
+        }
     }
 
     public override void OnServerReady(NetworkConnection conn) // Quando um client carregar
