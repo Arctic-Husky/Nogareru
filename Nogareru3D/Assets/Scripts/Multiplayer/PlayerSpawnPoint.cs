@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerSpawnPoint : MonoBehaviour
 {
+    // Este script é responsável por registrar pontos de spawn da cena no sistema de spawn
+
     private void Awake() => PlayerSpawnSystem.AddSpawnPoint(transform);
 
     private void OnDestroy() => PlayerSpawnSystem.RemoveSpawnPoint(transform);

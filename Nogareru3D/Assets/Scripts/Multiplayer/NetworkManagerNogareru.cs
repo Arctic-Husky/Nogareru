@@ -19,24 +19,36 @@ public class NetworkManagerNogareru : NetworkManager
     [Header("Game")]
     [SerializeField] private NetworkGamePlayer gamePlayerPrefab = null;
     [SerializeField] private GameObject playerSpawnSystem = null;
+    [SerializeField] private GameObject roundSystem = null;
 
     public static event Action OnClientConnected;
     public static event Action OnClientDisconnected;
     public static event Action<NetworkConnection> OnServerReadied;
+    public static event Action OnServerStopped;
 
     public List<NetworkRoomPlayer> RoomPlayers { get; } = new List<NetworkRoomPlayer>();
     public List<NetworkGamePlayer> GamePlayers { get; } = new List<NetworkGamePlayer>();
     //public List<NetworkRoomPlayer> SpectatorPlayers { get; } = new List<NetworkRoomPlayer>();
 
-    public override void OnStartServer() => spawnPrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs").ToList();
+    public override void OnStartServer()
+    {
+        spawnPrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs").ToList();
+    }
+    
 
     public override void OnStartClient()
     {
+        /*if (spawnPrefabs != null)
+            return;*/
+
         var spawnablePrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs");
+
+        NetworkClient.ClearSpawners(); // Adicionado para tentar acabar com warnings de replace de prefab
 
         foreach (var prefab in spawnablePrefabs)
         {
             NetworkClient.RegisterPrefab(prefab);
+            Debug.Log($"Registrou prefab {prefab.name}!");
         }
     }
 
@@ -45,7 +57,8 @@ public class NetworkManagerNogareru : NetworkManager
         base.OnClientConnect(conn);
 
         OnClientConnected?.Invoke();
-        Debug.Log("Conectou!");
+        Debug.Log("Conectou client!");
+        
     }
 
     public override void OnClientDisconnect(NetworkConnection conn)
@@ -128,7 +141,10 @@ public class NetworkManagerNogareru : NetworkManager
 
     public override void OnStopServer()
     {
+        OnServerStopped?.Invoke();
+
         RoomPlayers.Clear();
+        GamePlayers.Clear();
     }
 
     public void StartGame()
@@ -165,10 +181,13 @@ public class NetworkManagerNogareru : NetworkManager
 
     public override void OnServerSceneChanged(string sceneName)
     {
-        if(sceneName.StartsWith("Assets/Scenes/Jogo_Mapa"))
+        if(sceneName.Contains("Jogo_Mapa"))
         {
             GameObject playerSpawnSystemInstance = Instantiate(playerSpawnSystem);
             NetworkServer.Spawn(playerSpawnSystemInstance);
+
+            GameObject roundSystemInstance = Instantiate(roundSystem);
+            NetworkServer.Spawn(roundSystemInstance);
         }
     }
 
