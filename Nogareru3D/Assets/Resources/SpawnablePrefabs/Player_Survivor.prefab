@@ -247,6 +247,7 @@ MonoBehaviour:
   syncInterval: 0.1
   velocidade: 5
   characterController: {fileID: 1674475235388754272}
+  gravidade: 5
 --- !u!1 &1909685780699527348
 GameObject:
   m_ObjectHideFlags: 0

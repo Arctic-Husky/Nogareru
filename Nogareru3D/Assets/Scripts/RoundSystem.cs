@@ -52,20 +52,37 @@ public class RoundSystem : NetworkBehaviour
     [ServerCallback]
     private void StartRound()
     {
-        //RpcStartRound();
+        RpcStartRound();
     }
 
     [Server]
     private void CheckToStartRound(NetworkConnection conn)
     {
-        //if(Room.GamePlayers.Count(x => x.connectionToClient.isReady) != Room.GamePlayers)
+        if(Room.GamePlayers.Count(x => x.connectionToClient.isReady) != Room.GamePlayers.Count)
+        {
+            return;
+        }
+
+        animator.enabled = true;
+
+        RpcStartCountdown();
     }
 
     #endregion
 
     #region Client
 
+    [ClientRpc]
+    private void RpcStartCountdown()
+    {
+        animator.enabled = true;
+    }
 
+    [ClientRpc]
+    private void RpcStartRound()
+    {
+        Debug.Log("Comecou o round!");
+    }
 
     #endregion
 }

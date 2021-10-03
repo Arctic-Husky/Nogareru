@@ -455,6 +455,7 @@ MonoBehaviour:
   roomPlayerPrefab: {fileID: 2866696107091219989, guid: 1a379ba7be4582249abd8616c6792e14, type: 3}
   gamePlayerPrefab: {fileID: 1748323021119794927, guid: fb83814754c697442a96fc963560acd1, type: 3}
   playerSpawnSystem: {fileID: 3999234510987779947, guid: 4357266d446e4f342b27f36320e03848, type: 3}
+  roundSystem: {fileID: 5454950193522682016, guid: efc651c8c691bc1499dd80135ed232b6, type: 3}
 --- !u!1 &547089390
 GameObject:
   m_ObjectHideFlags: 0
