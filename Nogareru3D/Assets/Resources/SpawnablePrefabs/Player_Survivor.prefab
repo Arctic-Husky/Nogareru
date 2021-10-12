@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 2445010708496130928}
   - component: {fileID: 6083942075801929009}
   - component: {fileID: 2891559959872982423}
+  - component: {fileID: 2447590414890305897}
   m_Layer: 0
   m_Name: Player_Survivor
   m_TagString: Untagged
@@ -265,6 +266,19 @@ MonoBehaviour:
   syncInterval: 0.1
   luz: {fileID: 263532549032401207}
   indicadorDeLigado: {fileID: 5130581663921684118}
+--- !u!114 &2447590414890305897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674475235388754279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd4deec6c05dc8946a76f32d8fc8b406, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuPause: {fileID: 0}
 --- !u!1 &1909685780699527348
 GameObject:
   m_ObjectHideFlags: 0

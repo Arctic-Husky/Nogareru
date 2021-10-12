@@ -14,6 +14,10 @@ public class PlayerSpawnSystem : NetworkBehaviour
     private int nextIndex = 0;
     private int escolhido;
 
+    /// <summary>
+    /// Adiciona spawnpoints a lista
+    /// </summary>
+    /// <param name="transform"></param>
     public static void AddSpawnPoint(Transform transform)
     {
         spawnPoints.Add(transform);
@@ -24,6 +28,15 @@ public class PlayerSpawnSystem : NetworkBehaviour
     public static void RemoveSpawnPoint(Transform transform) => spawnPoints.Remove(transform);
 
     public override void OnStartServer() => NetworkManagerNogareru.OnServerReadied += SpawnPlayer;
+
+    /// <summary>
+    /// Bloqueia o input do jogador ate o inicio da partida
+    /// </summary>
+    public override void OnStartClient()
+    {
+        InputManager.Add(ActionMapNames.Player);
+        InputManager.Controls.Player.Look.Enable();
+    }
 
     [ServerCallback]
     private void OnDestroy() => NetworkManagerNogareru.OnServerReadied -= SpawnPlayer;

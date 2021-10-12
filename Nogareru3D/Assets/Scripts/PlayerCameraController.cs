@@ -15,7 +15,6 @@ public class PlayerCameraController : NetworkBehaviour
     [SerializeField] private Transform visorOffset = null;*/
 
     private float xRotacao = 0f;
-    private Controls controls;
     private Camera cameraComponent;
     private AudioListener audioListener;
 
@@ -31,19 +30,6 @@ public class PlayerCameraController : NetworkBehaviour
         }
     }
 
-    private Controls Controls
-    {
-        get
-        {
-            if(controls != null)
-            {
-                return controls;
-            }
-
-            return controls = new Controls();
-        }
-    }
-
     public override void OnStartAuthority()
     {
         
@@ -53,21 +39,14 @@ public class PlayerCameraController : NetworkBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
 
-        Controls.Player.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
+        InputManager.Controls.Player.Look.performed += ctx => Look(ctx.ReadValue<Vector2>());
+        //InputManager.Controls.Player.OpenMenu.performed += ctx => AbrirMenu(); Fazer em um script diferente
     }
 
-    [ClientCallback]
-    private void OnEnable()
+    /*private void AbrirMenu()
     {
-        Controls.Enable();
-    }
 
-    [ClientCallback]
-
-    private void OnDisable()
-    {
-        Controls.Disable();
-    }
+    }*/
 
     private void Look(Vector2 lookAxis)
     {
@@ -84,5 +63,10 @@ public class PlayerCameraController : NetworkBehaviour
         //visor.transform.rotation = Quaternion.Euler(rotacaoAlvo.x,0,0);
 
         playerTransform.Rotate(0, lookAxis.x * cameraVelocity.x * deltaTime, 0f);
+    }
+
+    public void AlterarSensibilidadeMouse()
+    {
+
     }
 }

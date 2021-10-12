@@ -8,29 +8,9 @@ public class Lanterna : NetworkBehaviour
     [SerializeField] private Light luz = null;
     [SerializeField] private GameObject indicadorDeLigado = null;
 
-    private Controls controls;
-
-    public Controls Controls
-    {
-        get
-        {
-            if (controls != null)
-            {
-                return controls;
-            }
-
-            return controls = new Controls();
-        }
-    }
-
-    [ClientCallback]
-    private void OnEnable() => Controls.Enable();
-    [ClientCallback]
-    private void OnDisable() => Controls.Disable();
-
     public override void OnStartAuthority()
     {
-        Controls.Player.Flashlight.started += ctx => CmdLigar();
+        InputManager.Controls.Player.Flashlight.started += ctx => CmdLigar();
     }
 
     [Command]

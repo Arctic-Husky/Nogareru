@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 5233310251387138128}
   - component: {fileID: 5233310251387138173}
   - component: {fileID: 5233310251387138130}
+  - component: {fileID: 6724638066597373980}
   m_Layer: 0
   m_Name: Player_Cacador
   m_TagString: Untagged
@@ -139,7 +140,7 @@ MonoBehaviour:
   sceneId: 0
   serverOnly: 0
   visible: 0
-  m_AssetId: 812cb264874b87a4e8d0fa3f6cd8fef2
+  m_AssetId: 06ff8786e91edf7429401d891b6fdf2a
   hasSpawned: 0
 --- !u!114 &5233310251387138135
 MonoBehaviour:
@@ -269,6 +270,19 @@ MonoBehaviour:
   syncInterval: 0.1
   luz: {fileID: 5233310251387138295}
   indicadorDeLigado: {fileID: 5233310251387138242}
+--- !u!114 &6724638066597373980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5233310251387138225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd4deec6c05dc8946a76f32d8fc8b406, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuPause: {fileID: 0}
 --- !u!1 &5233310251387138229
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,7 +407,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
+  m_Intensity: 1
   m_Range: 30
   m_SpotAngle: 40
   m_InnerSpotAngle: 3

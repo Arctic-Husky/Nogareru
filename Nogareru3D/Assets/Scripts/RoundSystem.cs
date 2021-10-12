@@ -81,7 +81,7 @@ public class RoundSystem : NetworkBehaviour
     [ClientRpc]
     private void RpcStartRound()
     {
-        Debug.Log("Comecou o round!");
+        InputManager.Remove(ActionMapNames.Player);
     }
 
     #endregion
